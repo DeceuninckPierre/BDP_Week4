@@ -16,4 +16,6 @@ This GIT repo contains all source code of the assignment:
   * BDP_week4.Rmd: slides code source
   * BDP_week4.html: slides in html (https://deceuninckpierre.github.io/BDP_Week4/BDP_week4.html)
   
-  
+<br/>
+
+Use the ShinyApp here: https://deceuninckpierre.shinyapps.io/bdp_week4/

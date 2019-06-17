@@ -92,7 +92,7 @@ EarthquakeData %>%
 
 ##All the info you want!!!
 
-ShinyApp link:
+ShinyApp link: https://deceuninckpierre.shinyapps.io/bdp_week4/
 
 - Documentation is on the fist tab (Help Page)
 - Application is on the second (interactive map)
