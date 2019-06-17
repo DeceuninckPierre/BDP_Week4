@@ -97,6 +97,6 @@ ShinyApp link:
 - Documentation is on the fist tab (Help Page)
 - Application is on the second (interactive map)
 
-Git Source code:
+Git Source code: https://github.com/DeceuninckPierre/BDP_Week4
 
 Have fun!!!

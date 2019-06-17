@@ -10,6 +10,10 @@ This GIT repo contains all source code of the assignment:
     * database.csv: earthquake data file
   * global.R: common fucntionalities shiny code
 
+<br\>
+
 * The Slidify markdown code:
   * BDP_week4.Rmd: slides code source
-  * BDP_week4.html: slides in html
+  * BDP_week4.html: slides in html (https://deceuninckpierre.github.io/BDP_Week4/BDP_week4.html)
+  
+  
