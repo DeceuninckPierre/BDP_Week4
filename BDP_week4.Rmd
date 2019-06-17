@@ -1,0 +1,102 @@
+---
+title: "Data Product Week 4"
+author: "Pierre Deceuninck"
+date: "June 17, 2019"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(leaflet)
+library(dplyr)
+
+getColor <- function(quakes) {
+  sapply(quakes$Magnitude, function(mag) {
+  if(mag <= 7) {
+    "green"
+  } else if(mag <= 8) {
+    "orange"
+  } else {
+    "red"
+  } })
+}
+
+EarthquakeData <- read.csv(paste0(getwd(),"/data/database.csv"))
+EarthquakeData <- EarthquakeData %>% 
+    filter(Type=="Earthquake") %>% 
+    mutate(Time=as.POSIXct(paste(Date,Time),format="%d/%m/%Y %H:%M:%S")) %>% 
+    mutate(Date=as.Date(Date,format="%d/%m/%Y")) %>% 
+    select(c("Date","Time","Depth","Magnitude","Magnitude.Type","Latitude","Longitude")) %>%
+    filter(!is.na(Date)) %>%
+    arrange(Time)
+
+
+```
+   
+##Earthquake BDP4
+
+Our shiny application will help professional or amateurs willing to get more information on earthquakes in a given area of the globe.
+
+### Data selection
+
+- Interactive geographical selection of an area of the globe
+- Selection of the magnitude range of interest
+- Selection of the time period of interest
+
+### Selected data visualisation
+
+- Frequency of eathquake by magnitude 
+- Depth per earthquake magnitude
+- Evolution of earquakes occurence magnitude over time
+
+## The interactive earthquake map
+
+```{r map, echo = FALSE, eval=TRUE, message=FALSE, out.width="100%"}
+EarthquakeData %>% 
+    leaflet() %>% 
+    addTiles() %>%
+    addCircleMarkers( 
+               popup = paste0("<b>Date:</b> ", EarthquakeData$Date, " ", EarthquakeData$Time,
+                              "<br><b>Magnitude:</b> ", EarthquakeData$Magnitude,
+                              "<br><b>Depth:</b> ", EarthquakeData$Depth),
+               weight = 1,
+               radius = 10^(EarthquakeData$Magnitude/6),
+               color = getColor(EarthquakeData)
+               )
+```
+
+\newline
+
+Click on a circle to get information / zoom in to select you area
+
+## Map code
+
+```{r map2, echo = TRUE, eval=FALSE}
+EarthquakeData <- read.csv(paste0(getwd(),"/data/database.csv"))
+
+EarthquakeData %>% 
+    leaflet() %>% 
+    addTiles() %>%
+    addCircleMarkers( 
+       popup = paste0("<b>Date:</b> ", 
+         EarthquakeData$Date, " ", EarthquakeData$Time,
+         "<br><b>Magnitude:</b> ", EarthquakeData$Magnitude,
+         "<br><b>Depth:</b> ", EarthquakeData$Depth),
+       weight = 1,
+       radius = 10^(EarthquakeData$Magnitude/6),
+       color = getColor(EarthquakeData)
+    )
+```
+
+##All the info you want!!!
+
+ShinyApp link:
+
+- Documentation is on the fist tab (Help Page)
+- Application is on the second (interactive map)
+
+Git Source code:
+
+Have fun!!!
